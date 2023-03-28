@@ -27,7 +27,7 @@ output "aws_ns_records" {
 }
 ```
 
-**The records output from aws_ns_records must be added to the relative DNS Zone**
+**The records output from aws_ns_records must be added to the parent DNS Zone**
 
 <br/>
 
