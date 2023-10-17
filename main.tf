@@ -50,9 +50,25 @@ resource "aws_route53domains_registered_domain" "aws_zone" {
 
 resource "aws_route53_record" "records" {
   for_each = { for record in var.records : join(".", [record[0], record[1]]) => record }
-  zone_id  = aws_route53_zone.aws_zone.zone_id
-  name     = each.value[0] != "" ? "${each.value[0]}.${aws_route53_zone.aws_zone.name}" : aws_route53_zone.aws_zone.name
-  type     = each.value[1]
-  ttl      = each.value[2]
-  records  = each.value[3]
+
+  zone_id = aws_route53_zone.aws_zone.zone_id
+  name    = each.value[0] != "" ? "${each.value[0]}.${aws_route53_zone.aws_zone.name}" : aws_route53_zone.aws_zone.name
+  type    = each.value[1]
+  ttl     = each.value[2]
+  records = each.value[3]
+}
+
+# alias records 
+resource "aws_route53_record" "alias_records" {
+  for_each = { for record in var.alias_records : join(".", [record[0], record[1]]) => record }
+
+  zone_id = aws_route53_zone.aws_zone.zone_id
+  name    = each.value[0] != "" ? "${each.value[0]}.${aws_route53_zone.aws_zone.name}" : aws_route53_zone.aws_zone.name
+  type    = each.value[1]
+
+  alias {
+    name                   = each.value[2]
+    zone_id                = each.value[3]
+    evaluate_target_health = each.value[4]
+  }
 }

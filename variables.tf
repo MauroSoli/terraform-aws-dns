@@ -11,6 +11,12 @@ variable "records" {
   type        = list(any)
 }
 
+variable "alias_records" {
+  description = "DNS alias records"
+  default     = []
+  type        = list(any)
+}
+
 variable "is_it_a_registered_domain" {
   description = "Is the specified domain an AWS registered domain?"
   default     = false
