@@ -11,16 +11,30 @@ This repo contains a Terraform module that manages an AWS Route53 Zone and its s
 
 ```hcl
 module dns {
-  source  = "MauroSoli/terraform-aws-dns"
-  version = "3.19"
+  source  = "MauroSoli/dns/aws"
+
+  dns_zone = "aws.example.com"
 
   records = [
-   #[ "name",     "type",  TTL, [ "value" ]]
-    [ "", "A",     600, [ "123.123.123.123" ]],
-    [ "record01", "CNAME", 600, [ "example.aws.example.com." ]],
-    [ "record02", "A",     600, [ "143.204.9.89" ]]
+   #[ "NAME",             "TYPE",  TTL,  [ "value" ]]
+    [ "",                 "A",     600,  [ "123.123.123.123" ]],
+    [ "record01",         "CNAME", 600,  [ "example.aws.example.com." ]],
+    [ "record02",         "A",     600,  [ "143.204.9.89" ]],
+    [ "email",            "TXT",   600,  [ "v=spf1 include:spf.protection.outlook.com -all" ]],
+    [ "_sipexample._tcp", "SRV",   3600, [ "100 1 5050 example.com." ]],
+    [ "999999t",          "MX",    3600, [ "10   mx.example.com." ]],
+  ]
+
+  alias_records = [
+    # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record#alias-record
+    # The cloudfront hosted_zone_id is static: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-route53.html
+
+    # [ "NAME", "TYPE", "ALIAS_NAME",             "ALIAS_ZONE_ID", EVALUATE_TARGET_HEALTH]
+      [ "data", "A",    "example.cloudfront.net", "EXAMPLE",       false],
+      [ "data", "AAAA", "example.cloudfront.net", "EXAMPLE",       false],
   ]
 }
+
 output "aws_ns_records" {
   value       = module.dns.aws_zone_ns
   description = "NS records for hosted zone"
