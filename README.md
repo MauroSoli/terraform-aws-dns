@@ -88,3 +88,48 @@ No modules.
 | <a name="output_aws_zone_id"></a> [aws\_zone\_id](#output\_aws\_zone\_id) | hosted zone ID |
 | <a name="output_aws_zone_ns"></a> [aws\_zone\_ns](#output\_aws\_zone\_ns) | NS records for hosted zone |
 <!-- END_TF_DOCS -->
+<!-- BEGINNING OF PRE-COMMIT-OPENTOFU DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.10.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 6.4.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 6.4.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [aws_route53_record.alias_records](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
+| [aws_route53_record.aws_zone](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
+| [aws_route53_record.records](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
+| [aws_route53_zone.aws_zone](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_zone) | resource |
+| [aws_route53domains_registered_domain.aws_zone](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53domains_registered_domain) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_alias_records"></a> [alias\_records](#input\_alias\_records) | DNS alias records | `list(any)` | `[]` | no |
+| <a name="input_dns_zone"></a> [dns\_zone](#input\_dns\_zone) | AWS hosted zone name | `string` | n/a | yes |
+| <a name="input_is_it_a_registered_domain"></a> [is\_it\_a\_registered\_domain](#input\_is\_it\_a\_registered\_domain) | Is the specified domain an AWS registered domain? | `bool` | `false` | no |
+| <a name="input_prevent_destroy"></a> [prevent\_destroy](#input\_prevent\_destroy) | Avoid to destroy the DNS zone during a tf destroy | `bool` | `false` | no |
+| <a name="input_records"></a> [records](#input\_records) | DNS records | `list(any)` | `[]` | no |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_aws_zone_id"></a> [aws\_zone\_id](#output\_aws\_zone\_id) | hosted zone ID |
+| <a name="output_aws_zone_ns"></a> [aws\_zone\_ns](#output\_aws\_zone\_ns) | NS records for hosted zone |
+<!-- END OF PRE-COMMIT-OPENTOFU DOCS HOOK -->

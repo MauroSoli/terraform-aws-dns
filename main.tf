@@ -5,7 +5,7 @@
 resource "aws_route53_zone" "aws_zone" {
   name          = var.dns_zone
   comment       = "DNS zone for resources on AWS"
-  force_destroy = false
+  force_destroy = var.prevent_destroy
 }
 
 # Manage NS records

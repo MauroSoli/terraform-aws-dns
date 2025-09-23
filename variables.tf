@@ -22,3 +22,9 @@ variable "is_it_a_registered_domain" {
   default     = false
   type        = bool
 }
+
+variable "prevent_destroy" {
+  description = "Avoid to destroy the DNS zone during a tf destroy"
+  default     = false
+  type        = bool
+}
